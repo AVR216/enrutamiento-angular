@@ -7,12 +7,36 @@ import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
 
 import { RouterModule, Routes } from '@angular/router';
+import { CoursesComponent } from './components/courses/courses.component';
+import { CoursesDetailComponent } from './components/courses-detail/courses-detail.component';
+import { ContactInfoComponent } from './components/contact-info/contact-info.component';
+import { ContactDetailComponent } from './components/contact-detail/contact-detail.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'contact', component: ContactComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'courses', component: CoursesComponent},
+  {path: 'courses/:course', component: CoursesDetailComponent},
+  {
+    path: 'contact', 
+    component: ContactComponent,
+    children: [
+      {
+        path: 'info',
+        component: ContactInfoComponent
+      },
+      {
+        path: 'details', 
+        component: ContactDetailComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'info',
+        pathMatch: 'full'
+      }
+    ]
+  },
   {path: 'about', component: AboutComponent},
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: 'home', pathMatch:'full'}
 ];
 
 @NgModule({
@@ -20,7 +44,9 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     ContactComponent,
-    AboutComponent
+    AboutComponent,
+    CoursesComponent,
+    CoursesDetailComponent
   ],
   imports: [
     BrowserModule,

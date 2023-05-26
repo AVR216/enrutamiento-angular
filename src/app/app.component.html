@@ -1,3 +1,26 @@
 <h1>Routing App</h1>
 <hr>
-<router-outlet></router-outlet>
+
+<div class="row">
+    <div class="col-sm-12 col-md-3">
+        
+        <ul class="list-group">
+
+            
+            <li *ngFor="let item of paths"
+                class="list-group-item text-center" 
+                [routerLink]="[item.path]"
+                routerLinkActive="link-active">
+                  {{ item.title }} 
+            </li>
+
+        </ul>
+      
+    </div>
+    
+    <div class="col-sm-12 col-md-9 my-2">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
+
